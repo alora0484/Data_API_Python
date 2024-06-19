@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: my_collections
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
